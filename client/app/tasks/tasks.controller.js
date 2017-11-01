@@ -162,7 +162,7 @@ angular.module('boardOsApp')
 
         $scope.Load();
 
-        $scope.uploadXmlFile = function($http) {
+        $scope.uploadXmlFile = function() {
 
             var file = document.getElementById('importFile').files[0],
                 reader = new FileReader();
@@ -170,7 +170,9 @@ angular.module('boardOsApp')
                 var x2js = new X2JS();
                 var aftCnv = x2js.xml_str2json(e.target.result);
                 $scope.data = aftCnv;
+
                 $scope.allitems = $scope.data.rss.channel.item;
+
                 // need to part
             };
             reader.readAsBinaryString(file);
