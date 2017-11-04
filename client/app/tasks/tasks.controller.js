@@ -4,6 +4,7 @@
 angular.module('boardOsApp')
     .controller('TasksCtrl', function($rootScope, $scope, $http, statusTask, progressStatusTask, Notification, $uibModal) {
         $scope.alltasks = [];
+        $scope.allitems = [];
         $scope.tasks = [];
         $scope.showTasks = [];
         $scope.task = {};
@@ -64,6 +65,7 @@ angular.module('boardOsApp')
                 $scope.suffixTask($scope.alltasks);
                 $scope.reloadTasks();
             });
+
         };
 
         $scope.reloadTasks = function() {
@@ -169,13 +171,15 @@ angular.module('boardOsApp')
             reader.onloadend = function(e) {
                 var x2js = new X2JS();
                 var aftCnv = x2js.xml_str2json(e.target.result);
-                $scope.data = aftCnv;
-
-                $scope.allitems = $scope.data.rss.channel.item;
-
-                // need to part
+                var item = aftCnv.rss.channel.item;
+                //filter only subtasks not present in boss
+                $scope.allitems = _.filter(item, function(r) {
+                    return _.isEmpty(r.parent) == false;
+                });
+                console.log($scope.allitems);
             };
             reader.readAsBinaryString(file);
+
         };
 
 
