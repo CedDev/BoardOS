@@ -21,6 +21,11 @@ angular.module('boardOsApp')
                         e['title'] = e.title.substr(e.title.indexOf(']') + 2);
                         if (e.title.indexOf('#') !== -1) { e['contexte'] = e.title.substring(e.title.indexOf('#'), e.title.indexOf(' ')); }
                         e.custom = e.customfields.customfield;
+
+                        e.start =new Date(e.created).toISOString();
+                        if(e.resolved){e.end =new Date(e.resolved).toISOString();}
+
+
                     });
 
                     //filter only subtasks not present in boss
@@ -28,7 +33,7 @@ angular.module('boardOsApp')
                         return _.isEmpty(r.parent) === false;
                     });
 
-                  //console.log($scope.allitems);
+                  console.log($scope.allitems);
 
                 };
 

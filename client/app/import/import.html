@@ -43,7 +43,11 @@
                         </th>
                         <th>status</th>
                         <th>estimated</th>
-                        <th>test</th>
+                        <th style="max-width:125px;width:125px;min-width:20px;">
+                            <a style="text-decoration: none" href="#" ng-click="orderByField='boss'; reverseSort = !reverseSort">
+                Imported <span ng-show="orderByField === 'boss'"><span ng-show="!reverseSort"> &nbsp;&nbsp;&nbsp; <i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort">&nbsp;&nbsp;&nbsp; <i class="fa fa-sort-desc"></i></span></span>
+              </a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,24 +56,23 @@
                       <td style="text-align: left ">
                           <div>
                               <!-- <div uib-tooltip-html=" 'Name : <b>{{task.actors[0].name}}</b>' " tooltip-placement="top "> -->
-                              <img alt=" " ng-src="{{ task.actors[0].avatar || 'assets/images/avatars/' + task.actors[0]._id + '.png'}} " class="img-circle " err-src="assets/images/avatars/avatar.png " />
+                              <img alt=" " ng-src="{{ item.avatar || 'assets/images/avatars/' + task.actors[0]._id + '.png'}} " class="img-circle " err-src="assets/images/avatars/avatar.png " />
                               <span class="text-muted "> {{item.assignee.__text}}</span>
-                              <img ng-if="task.actors.length>1" src="assets/images/avatars/avatar.png" class="img-circle" alt="">
+                              <img ng-if="item.assignee.length>1" src="assets/images/avatars/avatar.png" class="img-circle" alt="">
                           </div>
                       </td>
 
                         <td>
                             <div class="dont-break-out " ng-bind-html="item.title">
                             </div>
-                            <small>DCLIC.CBI...activity</small></td>
+                            <small>  <div ng-repeat="cust in item.custom | filter: { customfieldname: 'UO' }">DCLIC.CBI{{cust.customfieldvalues.customfieldvalue.__cdata.substr(5).split(' ').join('.').toUpperCase()}}</div></small></td>
                         <td>PROJET.APPSTD.{{item.component}}.{{item.labels.label}}.{{item.contexte}}</td>
-                        <td>{{item.created | date:'mediumDate'}}</td>
-                        <td>{{item.resolved}}</td>
+                        <td>{{item.start | date:'mediumDate'}}</td>
+                        <td>{{item.end | date:'mediumDate'}}</td>
                         <td>{{item.resolution.__text}}</td>
                         <td>{{item.timeoriginalestimate.__text}}</td>
                         <td>
-                            {{item.custom}}
-                            <div ng-repeat="cust in item.custom ">{{cust.customfieldname}}</div>
+                            <div ng-repeat="cust in item.custom | filter: { customfieldname: 'Boss' }">{{cust.customfieldvalues.customfieldvalue.__cdata}}</div>
                         </td>
                     </tr>
                 </tbody>
