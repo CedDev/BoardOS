@@ -55,6 +55,7 @@
 <link rel="stylesheet" href="app/dqm/dqm.css">
 <link rel="stylesheet" href="app/help/help.css">
 <link rel="stylesheet" href="app/hierarchies/hierarchies.css">
+<link rel="stylesheet" href="app/import/import.css">
 <link rel="stylesheet" href="app/KPI/KPI.css">
 <link rel="stylesheet" href="app/KPIs/KPIs.css">
 <link rel="stylesheet" href="app/mail/mail.css">
@@ -173,6 +174,12 @@
                   <a href="/mail">
                     <i class="fa fa-refresh"></i>
                     Execute
+                  </a>
+                </li>
+                <li ng-if="isAdmin">
+                  <a href="/import">
+                    <i class="fa fa-refresh"></i>
+                    Import
                   </a>
                 </li>
               </ul>
@@ -392,6 +399,8 @@
     <script src="app/help/help.js"></script>
     <script src="app/hierarchies/hierarchies.controller.js"></script>
     <script src="app/hierarchies/hierarchies.js"></script>
+    <script src="app/import/import.controller.js"></script>
+    <script src="app/import/import.js"></script>
     <script src="app/KPI/KPI.controller.js"></script>
     <script src="app/KPI/KPI.js"></script>
     <script src="app/KPIs/KPIs.controller.js"></script>
