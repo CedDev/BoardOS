@@ -2,7 +2,7 @@
 <div class="row">
     <div class="portlet">
         <div class="portlet-title">
-            <div class="caption"> <i class="fa fa-check"></i>Import task &nbsp;&nbsp;&nbsp; <small>Show {{allitems.length}}.  </small>
+            <div class="caption"> <i class="fa fa-check"></i>Import task &nbsp;&nbsp;&nbsp; <small>Show {{allitems.length}}  </small>
                 <input type="file" class="ng-pristine ng-valid ng-touched" id="importFile" placeholder="Select">Please select an external file with missing task to import :
             </div>
             <small class="text-muted pull-right"> <button class="btn btn-warning btn-xs" type="button" ng-click="uploadXmlFile()" ng-disabled="selected.name === null">Import Task</button></small>
@@ -21,10 +21,8 @@
                                 <i class="fa fa-tasks"></i> Name <span ng-show="orderByField === 'name'"><span ng-show="!reverseSort"> &nbsp;&nbsp;&nbsp; <i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort">&nbsp;&nbsp;&nbsp; <i class="fa fa-sort-desc"></i></span></span>
                             </a>
                             <small class="pull-right">
-
               <a href="#" ng-click="orderByField='activity'; reverseSort = !reverseSort">
-                <i class="fa fa-flash"></i>    Activity
-              </a>
+                <i class="fa fa-flash"></i>  Activity      </a>
             </small>
                         </th>
                         <th style="width:250px;">
@@ -44,20 +42,25 @@
                         </th>
                         <th>status</th>
                         <th>estimated</th>
+                        <th>test</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="item in allitems ">
                         <td style="text-align: left ">{{item.assignee.__text}}</td>
                         <td>
-                            <div class="dont-break-out " ng-bind-html="item.title ">
+                            <div class="dont-break-out " ng-bind-html="item.title">
                             </div>
                             <small>DCLIC.CBI...activity</small></td>
-                        <td>PROJET.APPSTD.{{item.component}}.{{item.labels.label}}.'#'</td>
+                        <td>PROJET.APPSTD.{{item.component}}.{{item.labels.label}}.{{item.contexte}}</td>
                         <td>{{item.created | date:'mediumDate'}}</td>
                         <td>{{item.resolved}}</td>
                         <td>{{item.resolution.__text}}</td>
                         <td>{{item.timeoriginalestimate.__text}}</td>
+                        <td>
+                            {{item.custom}}
+                            <div ng-repeat="cust in item.custom ">{{cust.customfieldname}}</div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
